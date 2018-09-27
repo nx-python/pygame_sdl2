@@ -101,7 +101,7 @@ cdef size_t python_write(SDL_RWops *context, const void *ptr, size_t size, size_
     data = (<char *> ptr)[:size * maxnum]
 
     try:
-        f.write(data)
+        f.write(data.hex())
     except Exception as e:
         set_error(e)
         return -1
