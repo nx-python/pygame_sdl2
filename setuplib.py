@@ -52,6 +52,9 @@ android = "PYGAME_SDL2_ANDROID" in os.environ
 # True if we're building on ios.
 ios = "PYGAME_SDL2_IOS" in os.environ
 
+# True if we are building for switch.
+switch = "PYGAME_SDL2_SWITCH" in os.environ
+
 windows = platform.win32_ver()[0]
 
 # The cython command.
@@ -283,7 +286,11 @@ def setup(name, version, **kwargs):
     Calls the distutils setup function.
     """
 
+    from static_python_build import StaticPythonCmd
     setuptools.setup(
+        cmdclass={
+            'StaticSetup': StaticPythonCmd.StaticPythonSetup,
+        },
         name = name,
         version = version,
         ext_modules = extensions,
